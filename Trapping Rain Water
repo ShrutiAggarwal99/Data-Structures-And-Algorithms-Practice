@@ -1,0 +1,44 @@
+https://practice.geeksforgeeks.org/problems/trapping-rain-water/0
+//T.C : O(n)
+//S.C : O(n)
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	//code
+	
+	int t,n,runningHighest,sum=0;
+	cin>>t;
+	while(t--){
+	    cin>>n;
+	    vector<int> heights(n,-1);
+	    vector<int> highestFromLeft, highestFromRight;
+	    for(int i=0;i<n;i++){
+	        cin>>heights[i];
+	    }
+	    
+	    highestFromLeft=heights;
+	    runningHighest=heights[0];
+	    for(int i=1;i<n;i++){
+	        runningHighest=max(runningHighest,heights[i]);
+	        highestFromLeft[i]=runningHighest;
+	    }
+	    
+	    highestFromRight=heights;
+	    runningHighest=heights[n-1];
+	    for(int i=n-2;i>=0;i--){
+	        runningHighest=max(runningHighest,heights[i]);
+	        highestFromRight[i]=runningHighest;
+	    }
+	    
+	    sum=0;
+	    for(int i=0;i<n;i++){
+	        sum+=min(highestFromLeft[i],highestFromRight[i])-heights[i];
+	    }
+	    cout<<sum<<endl;
+	    
+	}
+	
+	return 0;
+}
