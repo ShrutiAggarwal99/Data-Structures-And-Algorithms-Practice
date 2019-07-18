@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class TrieNode{
+public:
+    vector<TrieNode* > children;
+    bool isEndOfWord;
+    TrieNode(){
+        for(int i=1;i<=26;i++) (this->children).push_back(NULL);
+        this->isEndOfWord=false;
+    }
+};
+
+
+class Trie{
+    TrieNode *root;
+public:
+    Trie(){
+        root=new TrieNode;
+    }
+    int search(string str){
+        TrieNode* cNode=root;
+        for(int i=0;i<str.length();i++){
+            int index=str[i]-'a';
+            if(!(cNode->children[index])){
+                return false;
+            }
+            cNode=cNode->children[index];
+        }
+        return (cNode && cNode->isEndOfWord);
+    }
+    void insert(string str){
+        TrieNode* cNode=root;
+        for(int i=0;i<str.length();i++){
+            int index=str[i]-'a';
+            if(!(cNode->children[index])){
+                cNode->children[index]=new TrieNode;
+            }
+            cNode=cNode->children[index];
+        }
+        cNode->isEndOfWord=true;
+    }
+    
+};
+
+int main() {
+	//code
+	int t,n;
+	string searchStr;
+	cin>>t;
+	while(t--){
+	    Trie dict;
+	    cin>>n;
+	    vector<string> keys(n,"");
+	    for(int i=0;i<n;i++){
+	        cin>>keys[i];
+	    }
+	    cin>>searchStr;
+	    for(int i=0;i<n;i++){
+	        dict.insert(keys[i]);
+	    }
+	    cout<<dict.search(searchStr)<<endl;
+	}
+	return 0;
+}
