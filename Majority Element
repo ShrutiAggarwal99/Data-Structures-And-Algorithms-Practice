@@ -1,0 +1,44 @@
+//https://practice.geeksforgeeks.org/problems/majority-element/0
+//Using Moore's Voting Algo (Can do using hashmap also though)
+//T.C : O(n)
+//S.C : O(1)
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	//code
+	int t,n,majIndex,cnt;
+	cin>>t;
+	while(t--){
+	    cin>>n;
+	    vector<int> elts(n,0);
+	    for(int i=0;i<n;i++){
+	        cin>>elts[i];
+	    }
+	    
+	    majIndex=0;
+	    cnt=1;
+	    //MOORE'S VOTING ALGORITHM : gives a candidate of majority elt
+	    for(int i=1;i<n;i++){
+	        if(elts[i]==elts[majIndex]) cnt++;
+	        else cnt--;
+	        if(cnt==0){
+	            majIndex=i;
+	            cnt=1;
+	        }
+	    }
+	    
+	    //Check if the candidate is really a majority elt or not
+	    cnt=0;
+	    for(int i=0;i<n;i++){
+	        if(elts[i]==elts[majIndex]) cnt++;
+	    }
+	    
+	    if(cnt>(n/2)) cout<<elts[majIndex];
+	    else cout<<-1;
+	    cout<<endl;
+	    
+	}
+	return 0;
+}
