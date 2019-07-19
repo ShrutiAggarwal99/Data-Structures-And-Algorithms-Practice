@@ -1,0 +1,24 @@
+//T.C : O(h + k) where h is height of BST and k is number of nodes in given range.
+
+/*This is a function problem.You only need to complete the function given below*/
+/*
+
+void dfs(Node *root, int l, int h, int &cnt){
+    if(!root) return;
+    
+    if(root->data>=l && root->data<=h){
+        cnt++;
+        dfs(root->left,l,h,cnt);
+        dfs(root->right,l,h,cnt);
+    }
+    else if(root->data<l) dfs(root->right,l,h,cnt);
+    else dfs(root->left,l,h,cnt);
+}
+
+int getCountOfNode(Node *root, int l, int h)
+{
+  // your code goes here   
+  int cnt=0;
+  dfs(root,l,h,cnt);
+  return cnt;
+}
