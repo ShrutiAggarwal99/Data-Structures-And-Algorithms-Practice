@@ -1,5 +1,5 @@
 //Link for reference : https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-using-priority_queue-stl/
-//Need to fing the bug : giving TLE
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -43,11 +43,9 @@ public:
     dists[startVertex]=0;
     
     while(!pq.empty()){
-        cout<<"here";
-      while(finalised[pq.top().second]==true){
-        pq.pop();
+      if(finalised[pq.top().second]==true){
+        pq.pop(); continue;
       }
-      cout<<"here";
       int minDistVertex=pq.top().second;
       pq.pop();
       finalised[minDistVertex]=true;
@@ -56,7 +54,7 @@ public:
         int nbr=it->first;
         int wt=it->second;
           if (finalised[nbr] == false && dists[nbr] > dists[minDistVertex] + wt){
-            // Updating distance of v
+            // Updating distance of nbr
             dists[nbr] = dists[minDistVertex] + wt;
               pq.push({dists[nbr],nbr});
         }
